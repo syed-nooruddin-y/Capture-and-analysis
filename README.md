@@ -1,7 +1,6 @@
 # Capture-and-analysis
 
 #  Wireshark Network Traffic Analysis 
-
 This repository contains a comprehensive network traffic analysis conducted on Kali Linux using Wireshark.  
 The purpose of this task is to understand packet-level communication on a network, observe different protocols in action, and gain hands-on familiarity with traffic inspection.
 
@@ -10,7 +9,6 @@ This experiment demonstrates live packet capture, filtering, interpretation, and
 
 
 #  **Task Objectives**
-
 1. Install or open Wireshark on Kali Linux.
 2. Capture real-time network traffic.
 3. Generate traffic using common tools (browser, ping).
@@ -22,7 +20,6 @@ This experiment demonstrates live packet capture, filtering, interpretation, and
 
 
 #  **Environment Setup**
-
 - **Operating System:** Kali Linux (VM environment)
 - **Network Adapter:** `eth0` (NAT/Bridged — default for VMs)
 - **Tool Used:** Wireshark
@@ -34,40 +31,28 @@ This experiment demonstrates live packet capture, filtering, interpretation, and
 
 
 #  **Step-by-Step Procedure (Detailed)**
-
 *1. Launching Wireshark**
 Wireshark was opened from:
 Upon launching, the available interfaces were:
 - **eth0** (active interface)
 - **lo** (loopback)
-
 Since this Kali Linux instance is running in a VM, Wi-Fi interfaces like `wlan0` do not appear; instead, VM provides a NAT/Bridged Ethernet interface (`eth0`).
-
 
 *2. Starting the Capture**
 - Selected `eth0` as the capturing interface.
 - Clicked the **blue shark fin** icon to begin packet capture.
 - Wireshark began displaying real-time packets flowing through the VM network interface.
 
-
-
 *3. Generating Network Traffic**
 To produce various types of packets, two methods were used:
 
-
-
 *4. Stopping the Capture
-
 After generating traffic, the packet capture was stopped by clicking the red square (Stop) button in Wireshark.
 Stopping the capture finalizes the collected data and allows the file to be saved and analyzed.
 
-
-
 *5. Applying Display Filters
-
 Wireshark provides powerful display filters that help isolate specific types of packets.
 The following display filters were applied during analysis:
-
 Protocol	Purpose	Filter Used
 TCP	Reliable, connection-oriented communication	tcp
 UDP	Fast, connectionless traffic (used by DNS and QUIC)	udp
@@ -75,98 +60,62 @@ TLS/SSL	Encrypted HTTPS communication	tls
 DNS	Domain name resolution queries and responses	dns
 ARP	Resolves local IP ↔ MAC addresses	arp
 QUIC	Modern Google protocol running over UDP	quic
-
 Each filter allowed me to view only the packets related to that specific protocol, making the analysis clearer and more detailed.
 
 
 
 
 #  **Detailed Protocol Analysis
-
 Below is an in-depth explanation of each protocol identified during the capture session. Each protocol plays a specific role in network communication and contributes to how devices interact on the internet.
 
-
  TCP (Transmission Control Protocol)
-
 Purpose: Provides reliable, connection-oriented communication.
-
 Observed Behavior:
-
 SYN → SYN-ACK → ACK handshake during Google connection.
-
 Carried encrypted TLS data after connection was established.
-
 Use Case: HTTPS browsing, application communication.
 
-
-
  UDP (User Datagram Protocol)
-
 Purpose: Fast, connectionless protocol with low overhead.
-
 Observed Behavior:
-
 Used for DNS queries.
-
 Used by QUIC for faster encrypted browsing.
-
 Use Case: Streaming, gaming, DNS, QUIC-based traffic.
 
-
-
  TLS (Transport Layer Security)
-
 Purpose: Encrypts all HTTPS web traffic.
-
 Observed Behavior:
-
 TLS handshake packets (Client Hello, Server Hello).
-
 Encrypted application data that cannot be read directly.
-
 Use Case: Secure websites (HTTPS).
 
-
-
  DNS (Domain Name System)
-
 Purpose: Converts domain names (google.com) to IP addresses.
-
 Observed Behavior:
-
 DNS query sent to resolve Google’s server IP.
-
 DNS response showing public IPs like 142.x.x.x.
-
 Use Case: Every website access begins with DNS.
 
-
-
  ARP (Address Resolution Protocol)
-
 Purpose: Maps IP addresses to MAC addresses inside the local network.
-
 Observed Behavior:
-
 ARP requests: “Who has 10.x.x.x?”
-
 ARP replies with corresponding MAC addresses.
-
 Use Case: Local network communication.
 
-
-
  QUIC (Quick UDP Internet Connections)
-
 Purpose: Modern encrypted protocol developed by Google, faster than TCP.
-
 Observed Behavior:
-
 QUIC packets over UDP on port 443.
-
 Encrypted payload similar to TLS but more efficient.
-
 Use Case: YouTube, Google Search, Chrome traffic.
+
+ ICMP (Internet Control Message Protocol)**
+Purpose: Used for diagnostic operations such as ping.  
+Observed Behavior:
+ICMP Echo Requests sent to Google.  
+ICMP Echo Replies received.  
+Use Case:** Connectivity testing.
 
 
 
